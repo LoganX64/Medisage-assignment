@@ -1,0 +1,264 @@
+{
+  "info": {
+    "_postman_id": "66f171f4-7fef-4f7a-a955-307f58e335be",
+    "name": "Medisage",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37687945"
+  },
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "create project",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Project Alpha\",\r\n  \"description\": \"This is a sample project\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/projects",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get projects (pagination)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Project Alpha\",\r\n  \"description\": \"This is a sample project\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/projects?page=1&limit=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "projects"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get project by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Project Alpha\",\r\n  \"description\": \"This is a sample project\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/projects/69de35e6975638caf3608d0a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "projects",
+                "69de35e6975638caf3608d0a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete projects",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/projects/69de35e6975638caf3608d0a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "projects",
+                "69de35e6975638caf3608d0a"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Task",
+      "item": [
+        {
+          "name": "get task(filter + sort +pagination)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Project Alpha\",\r\n  \"description\": \"This is a sample project\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/projects/69dde8542b75d848482182d5/tasks?status=todo&sortBy=due_date_asc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "projects",
+                "69dde8542b75d848482182d5",
+                "tasks"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "todo",
+                  "description": "Filter by task status: todo | in_progress | done"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "due_date_asc",
+                  "description": "Sort by due date: due_date_asc | due_date_desc"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (starts at 1)",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Number of tasks per page",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "## Get Tasks for a Project\n\nRetrieve all tasks belonging to a specific project, with support for filtering, sorting, and pagination.\n\n**Endpoint:** `GET /projects/{id}/tasks`\n\n---\n\n### Path Variables\n\n| Variable | Description |\n| --- | --- |\n| `id` | The unique ID of the project |\n\n---\n\n### Query Parameters\n\n#### Filter\n\n| Parameter | Value | Description |\n| --- | --- | --- |\n| `status` | `todo` | `in_progress` | `done` | Filter tasks by their current status |\n\n#### Sort\n\n| Parameter | Value | Description |\n| --- | --- | --- |\n| `sortBy` | `due_date_asc` | Sort tasks by due date in ascending order (earliest first) |\n| `sortBy` | `due_date_desc` | Sort tasks by due date in descending order (latest first) |\n\n#### Pagination\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| `page` | `integer` | Page number to retrieve (starts at 1) |\n| `limit` | `integer` | Number of tasks per page |\n\n---\n\n### Example Requests\n\n**Basic:**\n\n```\nGET /projects/{id}/tasks\n\n ```\n\n**Filter by status:**\n\n```\nGET /projects/{id}/tasks?status=todo\n\n ```\n\n**Sort by due date (descending):**\n\n```\nGET /projects/{id}/tasks?sortBy=due_date_desc\n\n ```\n\n**Paginate results:**\n\n```\nGET /projects/{id}/tasks?page=1&limit=5\n\n ```\n\n**Combined (filter + sort + paginate):**\n\n```\nGET /projects/{id}/tasks?status=todo&sortBy=due_date_desc&page=1&limit=5\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "create task",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Design UI\",\r\n  \"description\": \"Create wireframes\",\r\n  \"status\": \"todo\",\r\n  \"priority\": \"high\",\r\n  \"due_date\": \"2026-04-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/projects/69dde8542b75d848482182d5/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "projects",
+                "69dde8542b75d848482182d5",
+                "tasks"
+              ]
+            },
+            "description": "## Create Task\n\nCreates a new task under a specific project.\n\n### Endpoint\n\n`POST /projects/:projectId/tasks`\n\n### Request Body\n\nSend a JSON object with the following fields:\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `title` | string | Yes | The title of the task (e.g. `\"Design UI\"`) |\n| `description` | string | No | A brief description of the task (e.g. `\"Create wireframes\"`) |\n| `status` | string | No | Current status of the task. Possible values: `\"todo\"` |\n| `priority` | string | No | Priority level of the task. Possible values: `\"high\"` |\n| `due_date` | string (ISO 8601) | No | The due date for the task in `YYYY-MM-DD` format (e.g. `\"2026-04-20\"`) |\n\n### Example Request Body\n\n``` json\n{\n  \"title\": \"Design UI\",\n  \"description\": \"Create wireframes\",\n  \"status\": \"todo\",\n  \"priority\": \"high\",\n  \"due_date\": \"2026-04-20\"\n}\n\n ```\n\n### Notes\n\n- The `projectId` in the URL path must be a valid project ID.\n    \n- The `due_date` should follow the `YYYY-MM-DD` format."
+          },
+          "response": []
+        },
+        {
+          "name": "update task",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Updated Task Title\",\r\n  \"status\": \"in-progress\",\r\n  \"priority\": \"medium\",\r\n  \"due_date\": \"2026-04-25\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/tasks/69ddec0260352b054798f074",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "tasks",
+                "69ddec0260352b054798f074"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete task",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/tasks/69ddec0260352b054798f074",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "tasks",
+                "69ddec0260352b054798f074"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
