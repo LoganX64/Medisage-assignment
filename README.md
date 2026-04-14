@@ -67,7 +67,7 @@ Medisage-assignment/
 
 ## Demo Video
 
-(https://github.com/user-attachments/assets/e68636c2-28ab-4d04-ba93-951182b2e977)
+https://github.com/user-attachments/assets/e68636c2-28ab-4d04-ba93-951182b2e977
 
 ## Submission Requirements
 
