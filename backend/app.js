@@ -7,7 +7,6 @@ import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(errorMiddleware);
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -18,4 +17,5 @@ app.use("/projects", projectRoutes);
 
 app.use("/", taskRoutes);
 
+app.use(errorMiddleware);
 export default app;
