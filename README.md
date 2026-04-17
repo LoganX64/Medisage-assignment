@@ -67,11 +67,9 @@ Medisage-assignment/
 
 ## Demo Video
 
-[Insert your demo video link here]
+https://github.com/user-attachments/assets/e68636c2-28ab-4d04-ba93-951182b2e977
 
 ## Submission Requirements
-
-Candidates must submit the following:
 - GitHub repository link
 - README file with setup instructions
 - API documentation or Postman collection
